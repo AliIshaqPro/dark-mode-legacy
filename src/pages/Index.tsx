@@ -123,14 +123,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative z-10 rounded-xl overflow-hidden border border-white/10 shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1596262415948-36a4a910ec05?q=80&w=1476"
-                  alt="Ali Ishaq - Developer" 
-                  className="w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-100 via-transparent to-transparent"></div>
-              </div>
+              
               
               <div className="absolute -bottom-5 -right-5 p-4 glass-panel rounded-lg backdrop-blur-xl w-48">
                 <div className="flex items-center">
