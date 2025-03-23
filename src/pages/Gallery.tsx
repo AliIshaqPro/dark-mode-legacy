@@ -78,6 +78,54 @@ const galleryItems = [
     imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1981",
     category: "Mobile Design",
   },
+  {
+    id: 13,
+    title: "Portfolio Website",
+    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=6000",
+    category: "Web Development",
+  },
+  {
+    id: 14,
+    title: "Admin Dashboard",
+    imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070",
+    category: "UI/UX Design",
+  },
+  {
+    id: 15,
+    title: "News Portal",
+    imageUrl: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070",
+    category: "WordPress",
+  },
+  {
+    id: 16,
+    title: "Event Management Platform",
+    imageUrl: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2012",
+    category: "Web Development",
+  },
+  {
+    id: 17,
+    title: "Banking App Interface",
+    imageUrl: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070",
+    category: "Mobile Design",
+  },
+  {
+    id: 18,
+    title: "Digital Marketing Website",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015",
+    category: "WordPress",
+  },
+  {
+    id: 19,
+    title: "Task Management App",
+    imageUrl: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=2072",
+    category: "UI/UX Design",
+  },
+  {
+    id: 20,
+    title: "Online Learning Dashboard",
+    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=3543",
+    category: "Web Development",
+  },
 ];
 
 const Gallery = () => {

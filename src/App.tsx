@@ -12,6 +12,7 @@ import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/skills" element={<Skills />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

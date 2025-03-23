@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -14,7 +15,20 @@ import {
   Command,
   Cpu,
   Workflow,
-  Compass
+  Compass,
+  ShoppingCart,
+  Zap,
+  Package,
+  Settings,
+  Search,
+  Shield,
+  Cloud,
+  Monitor,
+  Table,
+  RefreshCw,
+  Share2,
+  LineChart,
+  HardDrive
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SkillCard from "@/components/SkillCard";
@@ -24,11 +38,15 @@ const skillsData = [
   { name: "WordPress", icon: <Globe size={20} />, level: 95, category: "WordPress" },
   { name: "PHP", icon: <FileCode size={20} />, level: 90, category: "WordPress" },
   { name: "ACF Pro", icon: <Layers size={20} />, level: 90, category: "WordPress" },
-  { name: "WooCommerce", icon: <Coffee size={20} />, level: 85, category: "WordPress" },
+  { name: "WooCommerce", icon: <ShoppingCart size={20} />, level: 85, category: "WordPress" },
   { name: "WordPress REST API", icon: <Server size={20} />, level: 85, category: "WordPress" },
   { name: "WordPress Theme Dev", icon: <PenTool size={20} />, level: 95, category: "WordPress" },
   { name: "WordPress Plugin Dev", icon: <Command size={20} />, level: 90, category: "WordPress" },
   { name: "Elementor", icon: <Layers size={20} />, level: 90, category: "WordPress" },
+  { name: "Gutenberg", icon: <Layers size={20} />, level: 85, category: "WordPress" },
+  { name: "Custom Post Types", icon: <Table size={20} />, level: 95, category: "WordPress" },
+  { name: "WordPress Security", icon: <Shield size={20} />, level: 80, category: "WordPress" },
+  { name: "WordPress SEO", icon: <Search size={20} />, level: 85, category: "WordPress" },
   
   // Ruby on Rails
   { name: "Ruby", icon: <Code size={20} />, level: 85, category: "Ruby on Rails" },
@@ -37,8 +55,12 @@ const skillsData = [
   { name: "Sidekiq", icon: <Cpu size={20} />, level: 75, category: "Ruby on Rails" },
   { name: "RSpec", icon: <Command size={20} />, level: 80, category: "Ruby on Rails" },
   { name: "ActiveRecord", icon: <Database size={20} />, level: 85, category: "Ruby on Rails" },
-  { name: "Hotwire", icon: <Workflow size={20} />, level: 80, category: "Ruby on Rails" },
+  { name: "Hotwire", icon: <Zap size={20} />, level: 80, category: "Ruby on Rails" },
   { name: "Redis", icon: <Database size={20} />, level: 75, category: "Ruby on Rails" },
+  { name: "Turbo", icon: <RefreshCw size={20} />, level: 80, category: "Ruby on Rails" },
+  { name: "Stimulus", icon: <Zap size={20} />, level: 80, category: "Ruby on Rails" },
+  { name: "Action Cable", icon: <Share2 size={20} />, level: 75, category: "Ruby on Rails" },
+  { name: "Active Storage", icon: <HardDrive size={20} />, level: 85, category: "Ruby on Rails" },
   
   // MERN Stack
   { name: "JavaScript", icon: <Code size={20} />, level: 90, category: "MERN Stack" },
@@ -49,16 +71,29 @@ const skillsData = [
   { name: "Redux", icon: <Workflow size={20} />, level: 85, category: "MERN Stack" },
   { name: "GraphQL", icon: <Compass size={20} />, level: 75, category: "MERN Stack" },
   { name: "TypeScript", icon: <Code size={20} />, level: 85, category: "MERN Stack" },
+  { name: "Next.js", icon: <Zap size={20} />, level: 80, category: "MERN Stack" },
+  { name: "React Query", icon: <RefreshCw size={20} />, level: 80, category: "MERN Stack" },
+  { name: "Socket.io", icon: <Share2 size={20} />, level: 75, category: "MERN Stack" },
+  { name: "JWT Authentication", icon: <Shield size={20} />, level: 85, category: "MERN Stack" },
+  { name: "React Router", icon: <Compass size={20} />, level: 90, category: "MERN Stack" },
+  { name: "Mongoose", icon: <Database size={20} />, level: 85, category: "MERN Stack" },
   
-  // Other Technologies
+  // Tools & Technologies
   { name: "Git", icon: <GitBranch size={20} />, level: 90, category: "Tools" },
   { name: "RESTful APIs", icon: <Server size={20} />, level: 90, category: "Tools" },
-  { name: "AWS", icon: <Server size={20} />, level: 75, category: "Tools" },
-  { name: "Docker", icon: <Cpu size={20} />, level: 70, category: "Tools" },
+  { name: "AWS", icon: <Cloud size={20} />, level: 75, category: "Tools" },
+  { name: "Docker", icon: <Package size={20} />, level: 70, category: "Tools" },
   { name: "SCSS/SASS", icon: <PenTool size={20} />, level: 90, category: "Tools" },
   { name: "Tailwind CSS", icon: <PenTool size={20} />, level: 90, category: "Tools" },
-  { name: "Responsive Design", icon: <PenTool size={20} />, level: 95, category: "Tools" },
+  { name: "Responsive Design", icon: <Monitor size={20} />, level: 95, category: "Tools" },
   { name: "Performance Optimization", icon: <BarChart size={20} />, level: 85, category: "Tools" },
+  { name: "Webpack", icon: <Package size={20} />, level: 80, category: "Tools" },
+  { name: "Jest", icon: <Command size={20} />, level: 75, category: "Tools" },
+  { name: "GitHub Actions", icon: <Settings size={20} />, level: 70, category: "Tools" },
+  { name: "Heroku", icon: <Cloud size={20} />, level: 85, category: "Tools" },
+  { name: "Netlify", icon: <Cloud size={20} />, level: 90, category: "Tools" },
+  { name: "Vercel", icon: <Cloud size={20} />, level: 90, category: "Tools" },
+  { name: "Analytics", icon: <LineChart size={20} />, level: 80, category: "Tools" },
 ];
 
 const Skills = () => {
@@ -148,6 +183,14 @@ const Skills = () => {
                       <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2 mt-2"></span>
                       <span>Performance optimization and security hardening</span>
                     </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2 mt-2"></span>
+                      <span>Headless WordPress implementation with modern frontends</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2 mt-2"></span>
+                      <span>Custom Gutenberg blocks and page builders</span>
+                    </li>
                   </ul>
                 </div>
                 
@@ -169,6 +212,14 @@ const Skills = () => {
                     <li className="flex items-start">
                       <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2 mt-2"></span>
                       <span>Elementor, Gutenberg, WooCommerce</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2 mt-2"></span>
+                      <span>WordPress Multisite and Multilingual solutions</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2 mt-2"></span>
+                      <span>WordPress caching and optimization tools</span>
                     </li>
                   </ul>
                 </div>
@@ -204,6 +255,14 @@ const Skills = () => {
                       <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2 mt-2"></span>
                       <span>Authentication, authorization, and security</span>
                     </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2 mt-2"></span>
+                      <span>Background job processing and scheduling</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2 mt-2"></span>
+                      <span>Test-driven development with RSpec</span>
+                    </li>
                   </ul>
                 </div>
                 
@@ -225,6 +284,14 @@ const Skills = () => {
                     <li className="flex items-start">
                       <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2 mt-2"></span>
                       <span>ActiveRecord, ActiveStorage, ActionCable</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2 mt-2"></span>
+                      <span>Rails API with JWT authentication</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2 mt-2"></span>
+                      <span>Heroku, Capistrano, Docker deployment</span>
                     </li>
                   </ul>
                 </div>
@@ -260,6 +327,14 @@ const Skills = () => {
                       <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2 mt-2"></span>
                       <span>State management with Redux, Context API, or Zustand</span>
                     </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2 mt-2"></span>
+                      <span>Real-time applications with Socket.io</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2 mt-2"></span>
+                      <span>Server-side rendering with Next.js</span>
+                    </li>
                   </ul>
                 </div>
                 
@@ -281,6 +356,14 @@ const Skills = () => {
                     <li className="flex items-start">
                       <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2 mt-2"></span>
                       <span>JWT Authentication, Socket.io, GraphQL</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2 mt-2"></span>
+                      <span>Tailwind CSS, Styled Components, Material UI</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2 mt-2"></span>
+                      <span>Vercel, Netlify, Heroku deployment</span>
                     </li>
                   </ul>
                 </div>
