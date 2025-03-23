@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, ChevronDown, ChevronUp } from "lucide-react";
+import { ExternalLink, Github, ChevronDown, ChevronUp, Image } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -23,20 +23,33 @@ const ProjectCard = ({
   category,
 }: ProjectCardProps) => {
   const [expanded, setExpanded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const toggleExpanded = () => setExpanded(!expanded);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
   return (
     <motion.div 
       className="bg-dark-300/80 rounded-xl overflow-hidden card-hover border border-white/10"
       whileHover={{ y: -5 }}
     >
-      <div className="relative overflow-hidden group h-48">
-        <img 
-          src={imageUrl} 
-          alt={title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="relative overflow-hidden group aspect-video h-48">
+        {!imageError ? (
+          <img 
+            src={imageUrl} 
+            alt={title} 
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={handleImageError}
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center bg-dark-400">
+            <Image size={32} className="text-gray-500 mb-2" />
+            <span className="text-gray-400 text-sm">Image unavailable</span>
+          </div>
+        )}
         <div className="absolute inset-0 bg-dark-100/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <div className="flex space-x-4">
             {githubUrl && (

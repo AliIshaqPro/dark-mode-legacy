@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface GalleryItemProps {
   imageUrl: string;
@@ -11,6 +12,11 @@ interface GalleryItemProps {
 
 const GalleryItem = ({ imageUrl, title, category }: GalleryItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
   return (
     <>
@@ -19,11 +25,20 @@ const GalleryItem = ({ imageUrl, title, category }: GalleryItemProps) => {
         whileHover={{ y: -5 }}
         onClick={() => setIsOpen(true)}
       >
-        <img 
-          src={imageUrl} 
-          alt={title} 
-          className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        <div className="aspect-video w-full h-64 relative">
+          {!imageError ? (
+            <img 
+              src={imageUrl} 
+              alt={title} 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={handleImageError}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-dark-300">
+              <span className="text-gray-400">Image unavailable</span>
+            </div>
+          )}
+        </div>
         <div className="absolute inset-0 bg-dark-100/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
           <h3 className="text-white font-medium text-center">{title}</h3>
           <span className="mt-2 text-xs px-3 py-1 rounded-full bg-neon-blue/20 text-neon-blue">
@@ -48,11 +63,18 @@ const GalleryItem = ({ imageUrl, title, category }: GalleryItemProps) => {
               className="relative max-w-4xl w-full rounded-lg overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <img 
-                src={imageUrl} 
-                alt={title} 
-                className="w-full h-auto object-contain"
-              />
+              {!imageError ? (
+                <img 
+                  src={imageUrl} 
+                  alt={title} 
+                  className="w-full h-auto max-h-[80vh] object-contain bg-dark-300/90"
+                  onError={handleImageError}
+                />
+              ) : (
+                <div className="w-full h-[50vh] flex items-center justify-center bg-dark-300">
+                  <span className="text-gray-400">Image unavailable</span>
+                </div>
+              )}
               <button
                 className="absolute top-4 right-4 bg-dark-300/80 rounded-full p-2 text-white hover:text-neon-blue transition-colors"
                 onClick={() => setIsOpen(false)}

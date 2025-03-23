@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import GalleryItem from "@/components/GalleryItem";
 
@@ -9,19 +8,19 @@ const galleryItems = [
   {
     id: 1,
     title: "E-Commerce Dashboard",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1470",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1470&auto=format&fit=crop",
     category: "UI/UX Design",
   },
   {
     id: 2,
     title: "Corporate Website",
-    imageUrl: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1469",
+    imageUrl: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1469&auto=format&fit=crop",
     category: "WordPress",
   },
   {
     id: 3,
     title: "Mobile App Interface",
-    imageUrl: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974",
+    imageUrl: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop",
     category: "Mobile Design",
   },
   {
@@ -170,23 +169,21 @@ const Gallery = () => {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="wait">
-            {filteredItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.1 * (index % 3) }}
-              >
-                <GalleryItem
-                  imageUrl={item.imageUrl}
-                  title={item.title}
-                  category={item.category}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          {filteredItems.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.1 * (index % 3) }}
+            >
+              <GalleryItem
+                imageUrl={item.imageUrl}
+                title={item.title}
+                category={item.category}
+              />
+            </motion.div>
+          ))}
         </div>
 
         {/* No Items Message */}
