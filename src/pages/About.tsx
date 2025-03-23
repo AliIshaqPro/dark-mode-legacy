@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import SocialLinks from "@/components/SocialLinks";
 import { FileCode, Code, Database, Globe, PenTool, Layers, Github, Award, BookOpen } from "lucide-react";
+import ImageWithFallback from "@/components/ImageWithFallback";
 
 const About = () => {
   return (
@@ -23,10 +24,11 @@ const About = () => {
           <AnimatedSection className="lg:col-span-5" delay={0.1}>
             <div className="relative">
               <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1596262415948-36a4a910ec05?q=80&w=1476" 
+                <ImageWithFallback 
+                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=6000&auto=format&fit=crop" 
                   alt="Ali Ishaq - Developer" 
                   className="w-full object-cover"
+                  fallbackSrc="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-100 via-transparent to-transparent"></div>
               </div>
