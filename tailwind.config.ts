@@ -74,72 +74,12 @@ export default {
 					blue: '#00f0ff',
 					purple: '#8a2be2',
 					pink: '#ff00ff'
-				},
-				gray: {
-					50: '#f9fafb',
-					100: '#f3f4f6',
-					200: '#e5e7eb',
-					300: '#d1d5db',
-					400: '#9ca3af',
-					500: '#6b7280',
-					600: '#4b5563',
-					700: '#374151',
-					800: '#1f2937',
-					900: '#111827',
 				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
-			},
-			typography: {
-				DEFAULT: {
-					css: {
-						maxWidth: '100%',
-						color: 'inherit',
-						a: {
-							color: 'inherit',
-							opacity: 0.75,
-							fontWeight: '500',
-							textDecoration: 'underline',
-							'&:hover': {
-								opacity: 1,
-								color: 'var(--tw-prose-links)'
-							},
-						},
-						code: {
-							color: 'var(--tw-prose-code)',
-							backgroundColor: 'var(--tw-prose-code-bg)',
-							padding: '0.25rem 0.375rem',
-							borderRadius: '0.25rem',
-							fontWeight: '600',
-						},
-						'blockquote p:first-of-type::before': false,
-						'blockquote p:last-of-type::after': false,
-					},
-				},
-				invert: {
-					css: {
-						'--tw-prose-body': 'var(--tw-prose-invert-body)',
-						'--tw-prose-headings': 'var(--tw-prose-invert-headings)',
-						'--tw-prose-lead': 'var(--tw-prose-invert-lead)',
-						'--tw-prose-links': 'var(--tw-prose-invert-links)',
-						'--tw-prose-bold': 'var(--tw-prose-invert-bold)',
-						'--tw-prose-counters': 'var(--tw-prose-invert-counters)',
-						'--tw-prose-bullets': 'var(--tw-prose-invert-bullets)',
-						'--tw-prose-hr': 'var(--tw-prose-invert-hr)',
-						'--tw-prose-quotes': 'var(--tw-prose-invert-quotes)',
-						'--tw-prose-quote-borders': 'var(--tw-prose-invert-quote-borders)',
-						'--tw-prose-captions': 'var(--tw-prose-invert-captions)',
-						'--tw-prose-code': 'var(--tw-prose-invert-code)',
-						'--tw-prose-code-bg': 'var(--tw-prose-invert-code-bg)',
-						'--tw-prose-pre-code': 'var(--tw-prose-invert-pre-code)',
-						'--tw-prose-pre-bg': 'var(--tw-prose-invert-pre-bg)',
-						'--tw-prose-th-borders': 'var(--tw-prose-invert-th-borders)',
-						'--tw-prose-td-borders': 'var(--tw-prose-invert-td-borders)',
-					},
-				},
 			},
 			keyframes: {
 				'accordion-down': {
@@ -206,5 +146,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
+	plugins: [require("tailwindcss-animate")],
 } satisfies Config;

@@ -7,36 +7,6 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    
-    --primary: 196 80% 43%;
-    --primary-foreground: 0 0% 98%;
-    
-    --secondary: 240 5.9% 90%;
-    --secondary-foreground: 240 5.9% 10%;
-    
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-  }
-
-  .dark {
     --background: 225 25% 7%;
     --foreground: 210 20% 98%;
 
@@ -64,12 +34,13 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border selection:bg-secondary/20 selection:text-foreground;
+    @apply border-border selection:bg-secondary/20 selection:text-white;
   }
   
   html {
@@ -78,22 +49,11 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased overflow-x-hidden;
-    background-attachment: fixed;
-  }
-
-  .dark body {
-    @apply bg-dark-100;
+    @apply bg-dark-100 text-foreground antialiased overflow-x-hidden;
     background-image: 
       radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 35%), 
       radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 35%);
-  }
-
-  .light body {
-    @apply bg-white text-gray-800;
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.03) 0%, transparent 35%), 
-      radial-gradient(circle at 80% 80%, rgba(0, 153, 255, 0.03) 0%, transparent 35%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -128,16 +88,8 @@
     @apply bg-dark-300/60 backdrop-blur-md border border-white/10 shadow-xl;
   }
   
-  .light .glass-panel {
-    @apply bg-white/80 backdrop-blur-md border border-gray-200 shadow-lg text-gray-800;
-  }
-  
   .neo-button {
     @apply relative overflow-hidden bg-dark-300 px-6 py-3 rounded-md text-white font-medium transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,240,255,0.5)] hover:text-neon-blue;
-  }
-  
-  .light .neo-button {
-    @apply bg-white text-gray-800 border border-gray-200 hover:border-blue-300 hover:text-blue-600 hover:shadow-[0_0_15px_rgba(0,153,255,0.3)];
   }
   
   .neo-button::before {
@@ -150,23 +102,12 @@
     @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-neon-blue/20;
   }
   
-  .light .card-hover {
-    @apply hover:shadow-blue-400/20;
-  }
-  
   .section {
     @apply py-16 md:py-24;
   }
   
   .container-custom {
     @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
-  }
-
-  .prose-light {
-    @apply prose-headings:text-gray-800 prose-p:text-gray-700 prose-strong:text-gray-800;
-    @apply prose-ul:text-gray-700 prose-ol:text-gray-700 prose-li:text-gray-700;
-    @apply prose-a:text-blue-600 prose-a:no-underline prose-a:font-medium hover:prose-a:text-blue-700;
-    @apply prose-blockquote:text-gray-700 prose-blockquote:border-l-blue-500;
   }
 }
 
