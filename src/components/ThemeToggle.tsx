@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Sun, Moon } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { useToast } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
 
 const ThemeToggle = () => {
   const { toast } = useToast();
