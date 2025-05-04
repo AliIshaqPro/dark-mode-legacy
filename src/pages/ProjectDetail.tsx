@@ -128,7 +128,7 @@ const ProjectDetail = () => {
 
         {/* Featured Image */}
         <AnimatedSection delay={0.1}>
-          <div className="rounded-xl overflow-hidden mb-12 glass-panel p-2">
+          <div className="rounded-xl overflow-hidden mb-12 glass-panel p-2 shadow-lg shadow-neon-blue/5">
             {!imageError ? (
               <img
                 src={project.imageUrl}
@@ -147,76 +147,184 @@ const ProjectDetail = () => {
 
         {/* Project Content */}
         <AnimatedSection delay={0.2}>
-          <div className="prose prose-invert max-w-none">
-            <h2>Project Overview</h2>
-            <p>
-              This {project.category} project was designed to provide a comprehensive solution for {project.title.toLowerCase()}. 
-              The application was built using {project.technologies.slice(0, 3).join(", ")}, 
-              which provided the necessary tools and capabilities to implement all required features.
+          <div className="prose prose-invert max-w-none glass-panel rounded-xl p-8 shadow-lg shadow-neon-blue/5">
+            <div className="flex items-center mb-6">
+              <div className="w-1.5 h-12 bg-gradient-to-b from-neon-blue to-neon-purple rounded-full mr-4"></div>
+              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-purple m-0">Project Overview</h2>
+            </div>
+            
+            <p className="text-lg leading-relaxed mb-8 text-gray-300">
+              This <span className="font-semibold text-white">{project.category}</span> project was designed to provide an innovative solution 
+              for <span className="italic">{project.title.toLowerCase()}</span>. Built with modern technologies including 
+              <span className="font-semibold text-neon-blue"> {project.technologies.slice(0, 3).join(", ")}</span>, 
+              this application delivers a powerful and intuitive user experience.
             </p>
             
-            <h2>Key Features</h2>
-            <ul>
-              <li>Responsive design for all screen sizes and devices</li>
-              <li>Intuitive user interface with modern design principles</li>
-              <li>Optimized performance and loading times</li>
-              <li>Secure data handling and storage</li>
-              <li>Integration with third-party services and APIs</li>
-            </ul>
+            <div className="flex items-center mb-6">
+              <div className="w-1.5 h-12 bg-gradient-to-b from-neon-blue to-neon-purple rounded-full mr-4"></div>
+              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-purple m-0">Key Features</h2>
+            </div>
             
-            <h2>Development Process</h2>
-            <p>
-              The development process followed an agile methodology, with regular iterations and 
-              client feedback incorporated throughout. The project was divided into several phases:
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-white/5 hover:border-neon-blue/30 transition-all">
+                <h3 className="text-lg font-semibold mb-2 flex items-center">
+                  <span className="w-2 h-2 bg-neon-blue rounded-full mr-2"></span>
+                  Responsive Design
+                </h3>
+                <p className="text-gray-400 m-0">Optimized for all screen sizes and devices to provide a consistent experience.</p>
+              </div>
+              
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-white/5 hover:border-neon-blue/30 transition-all">
+                <h3 className="text-lg font-semibold mb-2 flex items-center">
+                  <span className="w-2 h-2 bg-neon-purple rounded-full mr-2"></span>
+                  Intuitive UI/UX
+                </h3>
+                <p className="text-gray-400 m-0">User-centered interface designed with modern principles for effortless navigation.</p>
+              </div>
+              
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-white/5 hover:border-neon-blue/30 transition-all">
+                <h3 className="text-lg font-semibold mb-2 flex items-center">
+                  <span className="w-2 h-2 bg-neon-pink rounded-full mr-2"></span>
+                  Optimized Performance
+                </h3>
+                <p className="text-gray-400 m-0">Exceptional loading times and smooth interactions for better user satisfaction.</p>
+              </div>
+              
+              <div className="bg-dark-300/50 p-4 rounded-lg border border-white/5 hover:border-neon-blue/30 transition-all">
+                <h3 className="text-lg font-semibold mb-2 flex items-center">
+                  <span className="w-2 h-2 bg-neon-blue rounded-full mr-2"></span>
+                  Secure Implementation
+                </h3>
+                <p className="text-gray-400 m-0">Best practices for data handling and storage to maintain security standards.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center mb-6">
+              <div className="w-1.5 h-12 bg-gradient-to-b from-neon-blue to-neon-purple rounded-full mr-4"></div>
+              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-purple m-0">Development Process</h2>
+            </div>
+            
+            <p className="text-lg leading-relaxed mb-6 text-gray-300">
+              The development followed an agile methodology with regular iterations and feedback incorporation:
             </p>
             
-            <ol>
-              <li>Requirements analysis and planning</li>
-              <li>Design and prototyping</li>
-              <li>Development and implementation</li>
-              <li>Testing and quality assurance</li>
-              <li>Deployment and maintenance</li>
-            </ol>
+            <div className="relative pl-8 space-y-6 mb-8 before:absolute before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-gradient-to-b before:from-neon-blue before:via-neon-purple before:to-neon-pink">
+              <div className="relative">
+                <div className="absolute left-[-28px] w-6 h-6 rounded-full bg-dark-100 border-2 border-neon-blue flex items-center justify-center">
+                  <span className="text-xs font-bold">1</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">Requirements Analysis</h3>
+                <p className="text-gray-400 m-0">Comprehensive understanding of project needs and user expectations.</p>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute left-[-28px] w-6 h-6 rounded-full bg-dark-100 border-2 border-neon-purple flex items-center justify-center">
+                  <span className="text-xs font-bold">2</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">Design & Prototyping</h3>
+                <p className="text-gray-400 m-0">Creating detailed mockups and interactive prototypes for validation.</p>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute left-[-28px] w-6 h-6 rounded-full bg-dark-100 border-2 border-neon-pink flex items-center justify-center">
+                  <span className="text-xs font-bold">3</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">Development & Implementation</h3>
+                <p className="text-gray-400 m-0">Bringing designs to life with clean, efficient, and scalable code.</p>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute left-[-28px] w-6 h-6 rounded-full bg-dark-100 border-2 border-neon-blue flex items-center justify-center">
+                  <span className="text-xs font-bold">4</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">Testing & Quality Assurance</h3>
+                <p className="text-gray-400 m-0">Rigorous testing to ensure functionality, usability, and performance.</p>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute left-[-28px] w-6 h-6 rounded-full bg-dark-100 border-2 border-neon-purple flex items-center justify-center">
+                  <span className="text-xs font-bold">5</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">Deployment & Maintenance</h3>
+                <p className="text-gray-400 m-0">Seamless deployment with ongoing support and updates.</p>
+              </div>
+            </div>
             
-            <h2>Technical Implementation</h2>
-            <p>
-              The project leverages {project.technologies.join(", ")} to create a robust and scalable solution. 
-              Key technical aspects include:
+            <div className="flex items-center mb-6">
+              <div className="w-1.5 h-12 bg-gradient-to-b from-neon-blue to-neon-purple rounded-full mr-4"></div>
+              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-purple m-0">Technical Implementation</h2>
+            </div>
+            
+            <p className="text-lg leading-relaxed mb-6 text-gray-300">
+              The project leverages <span className="font-semibold text-neon-blue">{project.technologies.join(", ")}</span> to create a robust and scalable solution:
             </p>
             
-            <ul>
-              <li>Component-based architecture for reusability and maintainability</li>
-              <li>State management to handle complex data flows</li>
-              <li>API integration for data fetching and persistence</li>
-              <li>Authentication and authorization for secure access</li>
-              <li>Performance optimization techniques</li>
-            </ul>
+            <div className="bg-dark-300/30 p-6 rounded-xl border border-white/5 mb-8">
+              <ul className="space-y-4 list-none pl-0">
+                <li className="flex items-start">
+                  <div className="h-6 w-6 rounded-full bg-neon-blue/20 flex items-center justify-center text-neon-blue mr-3 mt-0.5">✓</div>
+                  <div>
+                    <h4 className="text-white font-medium m-0">Component-based Architecture</h4>
+                    <p className="text-gray-400 m-0">Modular design for maximum reusability and easier maintenance.</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="h-6 w-6 rounded-full bg-neon-purple/20 flex items-center justify-center text-neon-purple mr-3 mt-0.5">✓</div>
+                  <div>
+                    <h4 className="text-white font-medium m-0">State Management</h4>
+                    <p className="text-gray-400 m-0">Efficient handling of application state for complex data flows.</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="h-6 w-6 rounded-full bg-neon-pink/20 flex items-center justify-center text-neon-pink mr-3 mt-0.5">✓</div>
+                  <div>
+                    <h4 className="text-white font-medium m-0">API Integration</h4>
+                    <p className="text-gray-400 m-0">Seamless connection with backend services for data persistence.</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="h-6 w-6 rounded-full bg-neon-blue/20 flex items-center justify-center text-neon-blue mr-3 mt-0.5">✓</div>
+                  <div>
+                    <h4 className="text-white font-medium m-0">Authentication System</h4>
+                    <p className="text-gray-400 m-0">Secure access control with modern authentication protocols.</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="h-6 w-6 rounded-full bg-neon-purple/20 flex items-center justify-center text-neon-purple mr-3 mt-0.5">✓</div>
+                  <div>
+                    <h4 className="text-white font-medium m-0">Performance Optimization</h4>
+                    <p className="text-gray-400 m-0">Advanced techniques for optimal loading and rendering.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
             
-            <h2>Challenges and Solutions</h2>
-            <p>
-              Throughout the development process, several challenges were encountered and addressed:
+            <div className="flex items-center mb-6">
+              <div className="w-1.5 h-12 bg-gradient-to-b from-neon-blue to-neon-purple rounded-full mr-4"></div>
+              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-purple m-0">Outcome</h2>
+            </div>
+            
+            <p className="text-lg leading-relaxed text-gray-300">
+              The final product successfully meets all client requirements and provides an exceptional user experience.
+              The solution is scalable, maintainable, and easily extendable with additional features as needed.
             </p>
             
-            <ul>
-              <li>Ensuring cross-browser compatibility</li>
-              <li>Optimizing for mobile devices</li>
-              <li>Implementing complex business logic</li>
-              <li>Managing asynchronous operations</li>
-              <li>Ensuring data integrity and security</li>
-            </ul>
-            
-            <h2>Outcome</h2>
-            <p>
-              The final product successfully meets all client requirements and provides an excellent user experience.
-              The solution is scalable, maintainable, and can be easily extended with additional features in the future.
-            </p>
+            <div className="bg-gradient-to-r from-neon-blue/10 to-neon-purple/10 p-6 rounded-xl border border-white/5 mt-8">
+              <blockquote className="border-l-4 border-neon-blue pl-4 italic text-lg text-gray-300">
+                "This project demonstrates how thoughtful design and careful implementation can come together 
+                to create something truly remarkable in the digital space."
+              </blockquote>
+            </div>
           </div>
         </AnimatedSection>
 
         {/* Related Projects */}
         <AnimatedSection delay={0.3}>
           <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-6">Related Projects</h2>
+            <h2 className="text-2xl font-bold mb-8 flex items-center">
+              <div className="w-1 h-6 bg-neon-blue rounded-full mr-3"></div>
+              Related Projects
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {projects
                 .filter((relatedProject) => 
@@ -228,13 +336,14 @@ const ProjectDetail = () => {
                   <Link
                     key={index}
                     to={`/projects/${relatedProject.title.replace(/\s+/g, '-').toLowerCase()}`}
-                    className="glass-panel rounded-xl overflow-hidden hover:-translate-y-1 transition-transform duration-300"
+                    className="glass-panel rounded-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 shadow-lg shadow-neon-blue/5 group"
                   >
-                    <div className="h-40 overflow-hidden">
+                    <div className="h-40 overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark-300 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
                       <img
                         src={relatedProject.imageUrl}
                         alt={relatedProject.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
                           (e.target as HTMLImageElement).style.display = 'none';
                           (e.target as HTMLImageElement).parentElement!.style.backgroundColor = '#1a1a1a';
@@ -249,8 +358,8 @@ const ProjectDetail = () => {
                       />
                     </div>
                     <div className="p-4">
-                      <span className="text-xs font-medium text-neon-blue">{relatedProject.category}</span>
-                      <h3 className="font-semibold mt-1">{relatedProject.title}</h3>
+                      <span className="text-xs font-medium text-neon-blue mb-1 inline-block">{relatedProject.category}</span>
+                      <h3 className="font-semibold mt-1 group-hover:text-neon-blue transition-colors">{relatedProject.title}</h3>
                     </div>
                   </Link>
                 ))}
