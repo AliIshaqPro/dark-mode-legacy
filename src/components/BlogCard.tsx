@@ -22,18 +22,20 @@ interface BlogCardProps {
 const BlogCard = ({ post }: BlogCardProps) => {
   return (
     <div className="glass-panel rounded-xl overflow-hidden h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg card-hover">
-      <div className="relative h-48 overflow-hidden">
-        <ImageWithFallback
-          src={post.imageUrl}
-          alt={post.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 rounded-full bg-dark-300/80 backdrop-blur-sm text-xs font-medium text-neon-blue">
-            {post.category}
-          </span>
+      <Link to={`/blog/${post.id}`} className="block">
+        <div className="relative h-48 overflow-hidden">
+          <ImageWithFallback
+            src={post.imageUrl}
+            alt={post.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute top-4 left-4">
+            <span className="px-3 py-1 rounded-full bg-dark-300/80 backdrop-blur-sm text-xs font-medium text-neon-blue">
+              {post.category}
+            </span>
+          </div>
         </div>
-      </div>
+      </Link>
       
       <div className="p-6">
         <h3 className="text-xl font-bold mb-3 line-clamp-2">
