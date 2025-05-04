@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -6,6 +5,7 @@ import { ArrowRight, Code, BriefcaseBusiness, Layers, Github, Linkedin, Calendar
 import AnimatedSection from "@/components/AnimatedSection";
 import ProjectCard from "@/components/ProjectCard";
 import SocialLinks from "@/components/SocialLinks";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 const projects = [
   {
@@ -307,6 +307,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
       {/* Featured Projects Section */}
       <section className="section bg-dark-200/50 border-y border-white/5">
         <div className="container-custom">
@@ -359,6 +362,13 @@ const Index = () => {
                   >
                     <span>Get in Touch</span>
                     <ArrowRight size={18} className="ml-2" />
+                  </Link>
+                  
+                  <Link
+                    to="/services"
+                    className="px-6 py-3 rounded-md border border-white/10 text-white font-medium hover:bg-white/5 transition-colors duration-300"
+                  >
+                    View My Services
                   </Link>
                   
                   <div className="flex items-center space-x-4">
