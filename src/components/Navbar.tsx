@@ -48,13 +48,15 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "backdrop-blur-lg bg-dark-100/80 border-b border-white/10 shadow-lg light-mode:bg-white/80 light-mode:border-gray-200" : "bg-transparent"
+        scrolled 
+          ? "backdrop-blur-lg bg-dark-100/80 border-b border-white/10 shadow-lg light-mode:bg-white/95 light-mode:border-gray-200/80" 
+          : "bg-transparent"
       }`}
     >
       <nav className="container-custom flex items-center justify-between py-4">
         {/* Logo */}
         <Link to="/" className="text-xl md:text-2xl font-bold text-white light-mode:text-gray-900">
-          ALI ISHAQ<span className="text-neon-blue">.</span>
+          ALI ISHAQ<span className="text-neon-blue light-mode:text-blue-600">.</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -66,8 +68,8 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `text-sm font-medium transition-colors ${
                   isActive
-                    ? "text-neon-blue"
-                    : "text-gray-300 hover:text-white light-mode:text-gray-600 light-mode:hover:text-gray-900"
+                    ? "text-neon-blue light-mode:text-blue-600"
+                    : "text-gray-300 hover:text-white light-mode:text-gray-700 light-mode:hover:text-gray-900"
                 }`
               }
             >
@@ -111,8 +113,8 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     `text-sm font-medium transition-colors py-2 ${
                       isActive
-                        ? "text-neon-blue"
-                        : "text-gray-300 hover:text-white light-mode:text-gray-600 light-mode:hover:text-gray-900"
+                        ? "text-neon-blue light-mode:text-blue-600"
+                        : "text-gray-300 hover:text-white light-mode:text-gray-700 light-mode:hover:text-gray-900"
                     }`
                   }
                 >

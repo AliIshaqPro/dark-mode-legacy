@@ -38,33 +38,33 @@
   }
 
   .light-mode {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 98%;
+    --foreground: 222 84% 4.9%;
 
-    --card: 0 0% 98%;
-    --card-foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 4.9%;
 
-    --popover: 0 0% 98%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 4.9%;
 
-    --primary: 196 80% 45%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 196 80% 50%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 245 58% 51%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 20% 96%;
+    --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
 
     --accent: 210 40% 96%;
     --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 222 47% 11%;
+    --ring: 215 20.2% 65.1%;
   }
 }
 
@@ -87,10 +87,11 @@
   }
 
   .light-mode body {
-    @apply bg-white text-foreground;
+    @apply bg-gray-50 text-gray-900;
     background-image: 
-      radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.05) 0%, transparent 35%), 
-      radial-gradient(circle at 80% 80%, rgba(0, 175, 255, 0.05) 0%, transparent 35%);
+      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 35%), 
+      radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 35%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -104,11 +105,17 @@
   }
 
   .light-mode .text-glow {
-    text-shadow: 0 0 10px rgba(0, 180, 216, 0.7), 0 0 20px rgba(0, 180, 216, 0.4);
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.6), 0 0 20px rgba(59, 130, 246, 0.3);
   }
 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink;
+    background-size: 200% auto;
+    animation: text-shimmer 3s linear infinite;
+  }
+
+  .light-mode .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600;
     background-size: 200% auto;
     animation: text-shimmer 3s linear infinite;
   }
@@ -125,12 +132,16 @@
     margin: -1px;
   }
 
+  .light-mode .neon-border::before {
+    @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500;
+  }
+
   .glass-panel {
     @apply bg-dark-300/60 backdrop-blur-md border border-white/10 shadow-xl;
   }
 
   .light-mode .glass-panel {
-    @apply bg-white/80 backdrop-blur-md border border-gray-200 shadow-md;
+    @apply bg-white/90 backdrop-blur-md border border-gray-200/50 shadow-lg;
   }
   
   .neo-button {
@@ -138,7 +149,7 @@
   }
 
   .light-mode .neo-button {
-    @apply bg-white text-gray-800 hover:shadow-[0_0_15px_rgba(0,180,216,0.5)] hover:text-blue-600;
+    @apply bg-blue-600 text-white hover:bg-blue-700 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)];
   }
   
   .neo-button::before {
@@ -146,13 +157,17 @@
     @apply absolute inset-0 bg-gradient-to-r from-neon-blue to-neon-purple opacity-0 transition-opacity duration-300;
     @apply hover:opacity-20;
   }
+
+  .light-mode .neo-button::before {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600;
+  }
   
   .card-hover {
     @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-neon-blue/20;
   }
 
   .light-mode .card-hover {
-    @apply hover:shadow-blue-400/20;
+    @apply hover:shadow-blue-500/20;
   }
   
   .section {
@@ -163,10 +178,47 @@
     @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
   
-  /* Light mode prose overrides */
+  /* Light mode specific text colors */
   .light-mode .prose {
     @apply prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900;
     @apply prose-blockquote:text-gray-700 prose-ul:text-gray-700 prose-ol:text-gray-700;
+  }
+
+  /* Light mode navbar fixes */
+  .light-mode .text-gray-300 {
+    @apply text-gray-600;
+  }
+
+  .light-mode .text-gray-400 {
+    @apply text-gray-500;
+  }
+
+  .light-mode .text-white {
+    @apply text-gray-900;
+  }
+
+  .light-mode .bg-dark-100 {
+    @apply bg-white;
+  }
+
+  .light-mode .bg-dark-200 {
+    @apply bg-gray-100;
+  }
+
+  .light-mode .bg-dark-300 {
+    @apply bg-white;
+  }
+
+  .light-mode .bg-dark-400 {
+    @apply bg-gray-200;
+  }
+
+  .light-mode .border-white\/10 {
+    @apply border-gray-200;
+  }
+
+  .light-mode .border-white\/5 {
+    @apply border-gray-100;
   }
 }
 
