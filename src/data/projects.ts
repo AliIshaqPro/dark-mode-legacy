@@ -7,6 +7,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "http://dekosmetiskelaeger.dk/",
   },
   {
     title: "Clear Lines",
@@ -15,6 +16,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?q=80&w=1974",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://clearlinels.com",
   },
   {
     title: "MSF Properties",
@@ -23,6 +25,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1973",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://clearlinels.com",
   },
   {
     title: "Empyrian Media",
@@ -31,6 +34,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://empyrianmedia.com/",
   },
   {
     title: "Sodoma Law",
@@ -39,6 +43,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://sodomalaw.com",
   },
   {
     title: "GALILEO",
@@ -47,6 +52,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://galileoprotocol.io/",
   },
   {
     title: "B9 Energy",
@@ -55,6 +61,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://b9energy.co.uk",
   },
   {
     title: "Bag Elegance",
@@ -63,6 +70,7 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1974",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://bagelegance.site",
   },
   {
     title: "QNQ Builders",
@@ -71,5 +79,6 @@ export const projects = [
     imageUrl: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2076",
     category: "WordPress",
     githubUrl: "https://github.com/AliIshaqPro",
+    liveUrl: "https://qnqbuilders.co.uk",
   },
 ];

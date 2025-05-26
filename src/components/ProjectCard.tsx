@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ExternalLink, Github, ChevronDown, ChevronUp, Image } from "lucide-react";
+import { ExternalLink, Github, ChevronDown, ChevronUp, Image, Eye } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -55,50 +55,50 @@ const ProjectCard = ({
             </div>
           )}
           <div className="absolute inset-0 bg-dark-100/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div className="flex space-x-4">
-              {githubUrl && (
-                <motion.a 
-                  href={githubUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-dark-300/80 p-2 rounded-full text-white hover:text-neon-blue transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <Github size={20} />
-                </motion.a>
-              )}
+            <div className="flex space-x-3">
               {liveUrl && (
                 <motion.a 
                   href={liveUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="bg-dark-300/80 p-2 rounded-full text-white hover:text-neon-blue transition-colors"
+                  className="bg-gradient-to-r from-neon-blue to-neon-purple p-2.5 rounded-full text-white hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <ExternalLink size={20} />
+                  <Eye size={18} />
+                </motion.a>
+              )}
+              {githubUrl && (
+                <motion.a 
+                  href={githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-dark-300/80 p-2.5 rounded-full text-white hover:text-neon-blue transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Github size={18} />
                 </motion.a>
               )}
             </div>
           </div>
           <div className="absolute top-3 left-3">
-            <span className="bg-neon-blue/20 text-neon-blue text-xs px-3 py-1 rounded-full">
+            <span className="bg-neon-blue/20 text-neon-blue text-xs px-3 py-1 rounded-full backdrop-blur-sm">
               {category}
             </span>
           </div>
         </div>
       </Link>
       
-      <div className="p-5">
-        <h3 className="text-xl font-bold text-white mb-2">
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-white mb-3">
           <Link to={projectUrl} className="hover:text-neon-blue transition-colors">
             {title}
           </Link>
         </h3>
-        <p className="text-gray-400 text-sm mb-4">
+        <p className="text-gray-400 text-sm mb-4 leading-relaxed">
           {expanded ? description : `${description.substring(0, 100)}${description.length > 100 ? '...' : ''}`}
         </p>
         
@@ -121,7 +121,7 @@ const ProjectCard = ({
           </button>
         )}
         
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-4">
           {technologies.map((tech) => (
             <span 
               key={tech} 
@@ -130,6 +130,32 @@ const ProjectCard = ({
               {tech}
             </span>
           ))}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-3 pt-2">
+          {liveUrl && (
+            <a 
+              href={liveUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-medium py-2.5 px-4 rounded-lg hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <Eye size={16} />
+              Live Demo
+            </a>
+          )}
+          {githubUrl && (
+            <a 
+              href={githubUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-dark-400 text-gray-300 text-sm font-medium py-2.5 px-4 rounded-lg hover:bg-dark-400/80 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <Github size={16} />
+              Code
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
