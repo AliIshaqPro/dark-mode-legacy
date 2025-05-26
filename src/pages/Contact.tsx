@@ -76,14 +76,14 @@ const Contact = () => {
     {
       icon: <MapPin size={24} />,
       title: "Location",
-      value: "Available Worldwide",
+      value: "Islamabad, Pakistan",
       link: null,
     },
     {
       icon: <Globe size={24} />,
-      title: "Website",
-      value: "aliishaq.site",
-      link: "https://aliishaq.site",
+      title: "Portfolio",
+      value: "View My Work",
+      link: "/projects",
     },
   ];
 
@@ -101,16 +101,22 @@ const Contact = () => {
       color: "hover:text-blue-400",
     },
     {
-      icon: <Instagram size={20} />,
-      name: "Instagram",
-      url: "https://sample-instagram.com/",
-      color: "hover:text-pink-500",
+      icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 7.5C17.3 7.5 16.7 7.7 16.2 8C15.3 6.5 14 5.7 12.5 5.7C9.5 5.7 7 8.5 7 12C7 15.5 9.5 18.3 12.5 18.3C14 18.3 15.3 17.5 16.2 16C16.7 16.4 17.3 16.5 18 16.5C19.7 16.5 21 15.2 21 13.5C21 11.8 19.7 10.5 18 10.5C17.8 10.5 17.5 10.5 17.3 10.6C17.4 11 17.5 11.5 17.5 12C17.5 14.2 16.2 16 14.5 16C12.8 16 11.5 14.2 11.5 12C11.5 9.8 12.8 8 14.5 8C15.4 8 16.2 8.5 16.7 9.4C17 8.3 17.4 7.7 18 7.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>,
+      name: "Upwork",
+      url: "https://www.upwork.com/freelancers/~01ea89981961c95a70?mp_source=share",
+      color: "hover:text-green-500",
     },
     {
-      icon: <Facebook size={20} />,
-      name: "Facebook",
-      url: "https://sample-facebook.com/",
-      color: "hover:text-blue-500",
+      icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="2"/>
+        <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" strokeWidth="2"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" strokeWidth="2"/>
+      </svg>,
+      name: "Fiverr",
+      url: "https://www.fiverr.com/aliishaqpro",
+      color: "hover:text-green-400",
     },
   ];
 
@@ -122,7 +128,7 @@ const Contact = () => {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Get In <span className="text-gradient">Touch</span></h1>
             <p className="text-gray-400">
-              Have a project in mind or just want to say hello? Feel free to reach out.
+              Ready to start your WordPress project? Let's discuss how I can help bring your vision to life.
             </p>
           </div>
         </AnimatedSection>
@@ -198,7 +204,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-dark-400 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-neon-blue/50"
-                    placeholder="Message subject"
+                    placeholder="Project subject"
                   />
                 </div>
                 
@@ -212,7 +218,7 @@ const Contact = () => {
                     onChange={handleChange}
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg bg-dark-400 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-neon-blue/50 resize-none"
-                    placeholder="Your message"
+                    placeholder="Describe your project requirements"
                   ></textarea>
                 </div>
                 
@@ -245,7 +251,7 @@ const Contact = () => {
             <div className="glass-panel p-8 rounded-xl h-full">
               <h2 className="text-2xl font-bold mb-6">Let's Connect</h2>
               <p className="text-gray-400 mb-8">
-                Follow me on social media to stay updated with my latest projects and professional journey.
+                Follow me on social media and professional platforms to stay updated with my latest WordPress projects.
               </p>
               
               <div className="space-y-6">
@@ -272,7 +278,7 @@ const Contact = () => {
               
               <div className="mt-8 p-4 bg-neon-blue/10 rounded-lg border border-neon-blue/20">
                 <p className="text-gray-300 text-sm">
-                  Available for freelance projects and full-time positions. Let's work together to bring your ideas to life!
+                  Available for WordPress development projects and freelance work. Let's create something amazing together!
                 </p>
               </div>
             </div>

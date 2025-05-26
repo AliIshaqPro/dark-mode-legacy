@@ -14,7 +14,7 @@ const About = () => {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About <span className="text-gradient">Me</span></h1>
             <p className="text-gray-400">
-              Learn more about my journey, expertise, and passion for web development
+              Learn more about my journey, expertise, and passion for WordPress development
             </p>
           </div>
         </AnimatedSection>
@@ -25,8 +25,8 @@ const About = () => {
             <div className="relative">
               <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl">
                 <ImageWithFallback 
-                  src="https://qnqbuilders.co.uk/wp-content/uploads/2025/03/DSC_0004-scaled.jpg" 
-                  alt="Ali Ishaq - Developer" 
+                  src="/lovable-uploads/25e8dfbd-fdcb-45fc-b0b9-05b6d1a3d32c.png" 
+                  alt="Ali Ishaq - WordPress Developer" 
                   className="w-full object-cover"
                   fallbackSrc="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop"
                 />
@@ -52,7 +52,7 @@ const About = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs">Projects</p>
-                    <p className="text-white font-medium">15+ Completed</p>
+                    <p className="text-white font-medium">50+ Completed</p>
                   </div>
                 </div>
               </div>
@@ -63,19 +63,18 @@ const About = () => {
             <div className="glass-panel p-8 rounded-xl h-full">
               <h2 className="text-2xl font-bold mb-6">Who I Am</h2>
               <p className="text-gray-400 mb-6">
-                I'm Ali Ishaq, a Senior Developer with 1.5+ years of extensive experience in web development. 
-                My expertise spans across WordPress, Ruby on Rails, and MERN stack development, allowing me to 
-                create comprehensive solutions for diverse client needs.
+                I'm Ali Ishaq, a results-driven WordPress developer with over 1.5 years of extensive experience. 
+                My passion lies in developing custom plugins and themes to enhance web performance. Skilled in 
+                WooCommerce and capable of maintaining Nginx servers under heavy traffic.
               </p>
               <p className="text-gray-400 mb-6">
-                My journey in development began with a passion for creating digital experiences that not only 
-                function flawlessly but also engage users with intuitive interfaces and seamless interactions. 
-                I've since worked with clients across various industries, helping them transform their ideas 
-                into reality through code.
+                I focus on creating scalable solutions that improve user experience while driving business growth. 
+                My expertise spans across WordPress development, WooCommerce optimization, and server management, 
+                allowing me to deliver comprehensive web solutions.
               </p>
               <p className="text-gray-400 mb-6">
-                What sets me apart is my commitment to staying at the forefront of technological advancements, 
-                continuously expanding my skill set, and delivering solutions that exceed client expectations.
+                What sets me apart is my commitment to performance optimization, SEO enhancement, and my ability 
+                to troubleshoot and resolve complex WordPress issues quickly and efficiently.
               </p>
               
               <div className="flex flex-wrap gap-4 mt-8">
@@ -129,7 +128,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-3">WordPress Development</h3>
                 <p className="text-gray-400 mb-4">
-                  Custom WordPress themes and plugins, WooCommerce integration, and performance optimization for your online presence.
+                  Custom WordPress themes and plugins, performance optimization, and advanced functionality development.
                 </p>
                 <ul className="text-gray-400 space-y-2">
                   <li className="flex items-center">
@@ -142,7 +141,7 @@ const About = () => {
                   </li>
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span>
-                    E-commerce Solutions
+                    Performance Optimization
                   </li>
                 </ul>
               </div>
@@ -151,22 +150,22 @@ const About = () => {
                 <div className="bg-neon-purple/20 w-12 h-12 rounded-full flex items-center justify-center text-neon-purple mb-4">
                   <FileCode size={24} />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Ruby on Rails Development</h3>
+                <h3 className="text-xl font-bold mb-3">WooCommerce Solutions</h3>
                 <p className="text-gray-400 mb-4">
-                  Robust web applications with Ruby on Rails, from concept to deployment, focusing on performance and scalability.
+                  E-commerce development with WooCommerce, including multivendor marketplaces and payment integrations.
                 </p>
                 <ul className="text-gray-400 space-y-2">
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2"></span>
-                    Full-stack Rails Development
+                    WooCommerce Stores
                   </li>
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2"></span>
-                    API Development
+                    Dokan Pro Integration
                   </li>
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2"></span>
-                    Database Design & Optimization
+                    Payment Processing
                   </li>
                 </ul>
               </div>
@@ -175,22 +174,22 @@ const About = () => {
                 <div className="bg-neon-pink/20 w-12 h-12 rounded-full flex items-center justify-center text-neon-pink mb-4">
                   <Layers size={24} />
                 </div>
-                <h3 className="text-xl font-bold mb-3">MERN Stack Development</h3>
+                <h3 className="text-xl font-bold mb-3">Technical Support</h3>
                 <p className="text-gray-400 mb-4">
-                  Modern web applications with MongoDB, Express, React, and Node.js, creating seamless user experiences.
+                  WordPress bug fixes, server management, and SEO optimization for improved performance and user experience.
                 </p>
                 <ul className="text-gray-400 space-y-2">
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2"></span>
-                    React Frontend Development
+                    Bug Diagnosis & Fixes
                   </li>
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2"></span>
-                    Node.js Backend Services
+                    Server Management
                   </li>
                   <li className="flex items-center">
                     <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2"></span>
-                    Full-stack JavaScript Solutions
+                    SEO Optimization
                   </li>
                 </ul>
               </div>
@@ -198,10 +197,10 @@ const About = () => {
           </div>
         </AnimatedSection>
 
-        {/* Education & Certifications */}
+        {/* Education & Experience */}
         <AnimatedSection delay={0.4}>
           <div className="mb-24">
-            <h2 className="text-3xl font-bold mb-12 text-center">Education & <span className="text-gradient">Certifications</span></h2>
+            <h2 className="text-3xl font-bold mb-12 text-center">Education & <span className="text-gradient">Experience</span></h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="glass-panel p-6 rounded-xl">
@@ -210,13 +209,14 @@ const About = () => {
                     <BookOpen size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Computer Science</h3>
-                    <p className="text-neon-blue">University of Computer Science</p>
-                    <p className="text-gray-400 mt-1">2019 - 2023</p>
+                    <h3 className="text-xl font-bold">Bachelor of Computer Science</h3>
+                    <p className="text-neon-blue">Virtual University Of Pakistan</p>
+                    <p className="text-gray-400 mt-1">2020 - 2024</p>
+                    <p className="text-gray-400 mt-1">GPA: 3.8 / 4.0</p>
                   </div>
                 </div>
                 <p className="text-gray-400">
-                  Bachelor's degree with a focus on web technologies, software engineering principles, and database management systems.
+                  Bachelor's degree with focus on software engineering, web technologies, and database management systems.
                 </p>
               </div>
               
@@ -226,13 +226,13 @@ const About = () => {
                     <Award size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Advanced WordPress Development</h3>
-                    <p className="text-neon-purple">WordPress Academy</p>
-                    <p className="text-gray-400 mt-1">2022</p>
+                    <h3 className="text-xl font-bold">WordPress Developer</h3>
+                    <p className="text-neon-purple">Iplex</p>
+                    <p className="text-gray-400 mt-1">April 2025 - Present</p>
                   </div>
                 </div>
                 <p className="text-gray-400">
-                  Certification in advanced WordPress development techniques, custom theme and plugin development, and WooCommerce integration.
+                  Developed 15+ responsive WordPress websites with custom CMS solutions. Diagnosed and resolved 50+ WordPress bugs.
                 </p>
               </div>
               
@@ -242,13 +242,13 @@ const About = () => {
                     <Award size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Full Stack JavaScript Development</h3>
-                    <p className="text-neon-pink">Web Development Institute</p>
-                    <p className="text-gray-400 mt-1">2022</p>
+                    <h3 className="text-xl font-bold">Lead WordPress Developer</h3>
+                    <p className="text-neon-pink">Cortechsols</p>
+                    <p className="text-gray-400 mt-1">September 2024 - April 2025</p>
                   </div>
                 </div>
                 <p className="text-gray-400">
-                  Comprehensive training in modern JavaScript frameworks and libraries, including React, Node.js, and Express.
+                  Engineered 10+ custom WordPress themes for diverse clients. Led a team of 5 developers, improving efficiency by 25%.
                 </p>
               </div>
               
@@ -258,13 +258,13 @@ const About = () => {
                     <Award size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Ruby on Rails Mastery</h3>
-                    <p className="text-neon-blue">Rails Academy</p>
-                    <p className="text-gray-400 mt-1">2023</p>
+                    <h3 className="text-xl font-bold">WordPress Developer (Remote)</h3>
+                    <p className="text-neon-blue">Kodoverse</p>
+                    <p className="text-gray-400 mt-1">September 2024 - April 2025</p>
                   </div>
                 </div>
                 <p className="text-gray-400">
-                  Advanced certification in Ruby on Rails development, covering APIs, database optimization, and modern Rails practices.
+                  Optimized WooCommerce stores using Dokan Pro and BlockChain, increasing revenue by 15% through improved functionality.
                 </p>
               </div>
             </div>
