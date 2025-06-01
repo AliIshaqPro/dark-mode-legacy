@@ -75,14 +75,11 @@ const Navbar = () => {
             </NavLink>
           ))}
 
-          <div className="ml-2">
-            <ThemeToggle />
-          </div>
         </div>
 
         {/* Mobile Menu Button & Theme Toggle */}
         <div className="md:hidden flex items-center space-x-2">
-          <ThemeToggle />
+         
           <button
             className="text-white light-mode:text-gray-900 p-2"
             onClick={() => setIsOpen(!isOpen)}
