@@ -1,52 +1,29 @@
 
-import { useState, useEffect } from "react";
-import { Sun, Moon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { Moon, Sun } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useTheme } from "./ThemeProvider"
 
-type Theme = "dark" | "light";
-
-const ThemeToggle = () => {
-  const [theme, setTheme] = useState<Theme>("dark");
-  const { toast } = useToast();
-
-  // Initialize theme from localStorage or default to dark
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("light-mode", savedTheme === "light");
-    }
-  }, []);
+export function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
 
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("light-mode", newTheme === "light");
-
-    toast({
-      title: `${newTheme === "light" ? "Light" : "Dark"} mode activated`,
-      description: `Switched to ${newTheme} mode.`,
-      duration: 2000,
-    });
-  };
+    if (theme === "dark") {
+      setTheme("light")
+    } else {
+      setTheme("dark")
+    }
+  }
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
+    <Button 
+      variant="ghost" 
+      size="icon" 
       onClick={toggleTheme}
-      className="rounded-full w-9 h-9"
+      className="h-8 w-8 md:h-10 md:w-10"
     >
-      {theme === "dark" ? (
-        <Sun size={18} className="text-gray-300 hover:text-white transition-colors" />
-      ) : (
-        <Moon size={18} className="text-gray-700 hover:text-gray-900 transition-colors" />
-      )}
+      <Sun className="h-4 w-4 md:h-5 md:w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-4 w-4 md:h-5 md:w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
       <span className="sr-only">Toggle theme</span>
     </Button>
-  );
-};
-
-export default ThemeToggle;
+  )
+}

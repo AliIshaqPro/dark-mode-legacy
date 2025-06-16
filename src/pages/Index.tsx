@@ -1,401 +1,476 @@
-import { useRef } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, Code, BriefcaseBusiness, Layers, Github, Linkedin, Calendar } from "lucide-react";
-import AnimatedSection from "@/components/AnimatedSection";
-import ProjectCard from "@/components/ProjectCard";
-import SocialLinks from "@/components/SocialLinks";
-import TestimonialsSection from "@/components/TestimonialsSection";
 
-const projects = [
-  {
-    title: "E-Commerce Platform",
-    description: "A full-featured e-commerce solution built with React, Node.js, and MongoDB. Includes product management, user authentication, cart functionality, and payment processing with Stripe.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe API"],
-    imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070",
-    category: "MERN Stack",
-    githubUrl: "https://github.com/AliIshaqPro",
-  },
-  {
-    title: "Booking Management System",
-    description: "A comprehensive booking management system for service-based businesses, featuring appointment scheduling, staff management, and customer notifications.",
-    technologies: ["Ruby on Rails", "PostgreSQL", "Redis", "Sidekiq", "Hotwire"],
-    imageUrl: "https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?q=80&w=1974",
-    category: "Ruby on Rails",
-    githubUrl: "https://github.com/AliIshaqPro",
-  },
-  {
-    title: "Corporate Portfolio",
-    description: "A modern WordPress site for a corporate client with custom theme development, advanced animations, and integration with multiple third-party services.",
-    technologies: ["WordPress", "PHP", "JavaScript", "SCSS", "REST API"],
-    imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000",
-    category: "WordPress",
-    githubUrl: "https://github.com/AliIshaqPro",
-  },
-];
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { 
+  TrendingUp, 
+  TrendingDown, 
+  DollarSign, 
+  Package, 
+  Users, 
+  ShoppingCart,
+  AlertTriangle,
+  Calendar,
+  BarChart3,
+  PieChart,
+  Activity,
+  Target,
+  Clock,
+  CheckCircle,
+  XCircle,
+  Zap,
+  ArrowUpRight,
+  ArrowDownRight,
+  Star,
+  Eye,
+  Bell,
+  Smartphone
+} from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-const experienceData = [
-  {
-    period: "2022 - Present",
-    title: "Senior WordPress Developer",
-    company: "Freelance",
-    description: "Developing custom WordPress themes and plugins for clients across various industries. Implementing complex features and integrations with third-party services.",
-  },
-  {
-    period: "2022 - Present",
-    title: "Ruby on Rails Developer",
-    company: "Freelance",
-    description: "Building robust web applications with Ruby on Rails. Designing database schemas, implementing APIs, and deploying applications to cloud platforms.",
-  },
-  {
-    period: "2022 - Present",
-    title: "MERN Stack Developer",
-    company: "Freelance",
-    description: "Developing full-stack applications using MongoDB, Express.js, React, and Node.js. Creating responsive UIs and RESTful APIs for various business needs.",
-  },
-];
+interface DashboardStats {
+  financial: {
+    todayRevenue: number;
+    monthRevenue: number;
+    profitMargin: number;
+    revenueGrowth: number;
+    netProfit: number;
+    grossProfit: number;
+    monthExpenses: number;
+  };
+  sales: {
+    todaySales: number;
+    weekSales: number;
+    avgOrderValue: number;
+    highValueSales: Array<{
+      orderNumber: string;
+      amount: number;
+      customer: string;
+      date: string;
+    }>;
+  };
+  inventory: {
+    totalInventoryValue: number;
+    lowStockItems: number;
+    deadStockValue: number;
+    inventoryTurnover: number;
+    fastMovingProducts: Array<{
+      name: string;
+      sold: number;
+      remaining: number;
+    }>;
+  };
+  customers: {
+    totalCustomers: number;
+    newCustomersThisMonth: number;
+    avgCustomerValue: number;
+    totalReceivables: number;
+  };
+  cashFlow: {
+    netCashFlow: number;
+    monthlyInflows: number;
+    monthlyOutflows: number;
+  };
+  alerts: Array<{
+    type: string;
+    title: string;
+    message: string;
+    action: string;
+  }>;
+}
 
 const Index = () => {
-  const aboutRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  const scrollToAbout = () => {
-    aboutRef.current?.scrollIntoView({ behavior: "smooth" });
+  // Update time every minute
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Fetch dashboard stats
+  const { data: dashboardData, isLoading, error } = useQuery({
+    queryKey: ['dashboard-stats'],
+    queryFn: async () => {
+      const response = await fetch('https://zaidawn.site/wp-json/ims/v1/dashboard/enhanced-stats');
+      if (!response.ok) throw new Error('Failed to fetch stats');
+      return response.json();
+    },
+    refetchInterval: 2 * 60 * 1000, // Refetch every 2 minutes
+  });
+
+  const stats: DashboardStats = dashboardData?.data || {
+    financial: { todayRevenue: 0, monthRevenue: 0, profitMargin: 0, revenueGrowth: 0, netProfit: 0, grossProfit: 0, monthExpenses: 0 },
+    sales: { todaySales: 0, weekSales: 0, avgOrderValue: 0, highValueSales: [] },
+    inventory: { totalInventoryValue: 0, lowStockItems: 0, deadStockValue: 0, inventoryTurnover: 0, fastMovingProducts: [] },
+    customers: { totalCustomers: 0, newCustomersThisMonth: 0, avgCustomerValue: 0, totalReceivables: 0 },
+    cashFlow: { netCashFlow: 0, monthlyInflows: 0, monthlyOutflows: 0 },
+    alerts: []
   };
 
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-PK', {
+      style: 'currency',
+      currency: 'PKR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-screen bg-background">
+        <div className="text-center space-y-4">
+          <div className="w-8 h-8 border-2 border-muted border-t-primary rounded-full animate-spin mx-auto"></div>
+          <p className="text-sm text-muted-foreground">Loading Dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-screen bg-background">
+        <div className="text-center space-y-4">
+          <XCircle className="w-12 h-12 text-destructive mx-auto" />
+          <div>
+            <h3 className="text-lg font-semibold text-foreground">Failed to Load Dashboard</h3>
+            <p className="text-sm text-muted-foreground">Please check your connection and try again.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <main className="pt-16">
-      {/* Hero Section */}
-      <section className="min-h-[90vh] flex items-center relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-2/3 h-2/3 bg-neon-purple/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-2/3 h-2/3 bg-neon-blue/10 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4"></div>
-        </div>
-        
-        <div className="container-custom relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="inline-block px-3 py-1 rounded-full bg-neon-blue/10 text-neon-blue text-sm font-medium mb-6">
-                  Senior Developer
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                  Hi, I'm <span className="text-gradient">Ali Ishaq</span>
-                  <br /> 
-                  I Build Digital <br />
-                  Experiences
+    <div className="flex-1 flex flex-col h-screen bg-background overflow-hidden">
+      {/* Mobile-Optimized Header */}
+      <div className="flex-shrink-0 border-b bg-card shadow-sm">
+        <div className="p-3 md:p-4">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
+              <SidebarTrigger />
+              <div className="min-w-0">
+                <h1 className="text-lg md:text-xl font-bold text-foreground truncate">
+                  {isMobile ? "Dashboard" : "Business Dashboard"}
                 </h1>
-                <p className="text-gray-400 text-lg mb-8 max-w-lg">
-                  Senior Developer with 1.5+ years of extensive experience in WordPress, 
-                  Ruby on Rails, and MERN stack development.
-                </p>
-                
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    to="/projects"
-                    className="neo-button flex items-center"
-                  >
-                    <span>View My Work</span>
-                    <ArrowRight size={18} className="ml-2" />
-                  </Link>
-                  
-                  <button
-                    onClick={scrollToAbout}
-                    className="px-6 py-3 rounded-md border border-white/10 text-white font-medium hover:bg-white/5 transition-colors duration-300"
-                  >
-                    About Me
-                  </button>
-                </div>
-                
-                <div className="mt-12">
-                  <p className="text-gray-500 mb-4">Find me on</p>
-                  <SocialLinks />
-                </div>
-              </motion.div>
+                <p className="text-xs text-muted-foreground">Usman Hardware - Hafizabad</p>
+              </div>
             </div>
             
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              
-              
-              <div className="absolute -bottom-5 -right-5 p-4 glass-panel rounded-lg backdrop-blur-xl w-48">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
-                  <p className="text-white text-sm font-medium">Available for work</p>
-                </div>
-              </div>
-              
-              <div className="absolute -top-5 -left-5 p-4 glass-panel rounded-lg backdrop-blur-xl">
-                <div className="flex items-center space-x-3">
-                  <div className="bg-neon-blue/20 w-10 h-10 rounded-full flex items-center justify-center text-neon-blue">
-                    <Calendar size={20} />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-xs">Experience</p>
-                    <p className="text-white font-medium">1.5+ Years</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-        
-        <div className="absolute bottom-10 left-0 right-0 flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: 0.6, 
-              delay: 1.5,
-              repeat: Infinity,
-              repeatType: "reverse",
-              repeatDelay: 0.5
-            }}
-          >
-            <button
-              onClick={scrollToAbout}
-              className="flex flex-col items-center text-gray-500 hover:text-white transition-colors"
-            >
-              <span className="text-sm mb-2">Scroll down</span>
-              <div className="w-6 h-10 rounded-full border-2 border-gray-500 flex items-center justify-center p-1">
-                <div className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce"></div>
-              </div>
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section ref={aboutRef} className="section bg-dark-200/50 border-y border-white/5">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">About <span className="text-gradient">Me</span></h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">Get to know me and my expertise in web development</p>
+            <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+              <Badge variant="secondary" className="h-6 text-xs hidden sm:flex">
+                <Activity className="w-3 h-3 mr-1" />
+                Live
+              </Badge>
+              {isMobile && (
+                <Badge variant="outline" className="h-6 text-xs">
+                  <Smartphone className="w-3 h-3 mr-1" />
+                  Mobile
+                </Badge>
+              )}
             </div>
-          </AnimatedSection>
+          </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <AnimatedSection delay={0.1} direction="up" className="glass-panel p-6 rounded-xl">
-              <div className="bg-neon-blue/20 w-12 h-12 rounded-full flex items-center justify-center text-neon-blue mb-4">
-                <Code size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-3">WordPress Developer</h3>
-              <p className="text-gray-400 mb-4">
-                Expert in custom theme and plugin development, with a focus on performance optimization and seamless third-party integrations.
-              </p>
-              <ul className="text-gray-400 space-y-2">
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span>
-                  Custom Theme Development
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span>
-                  Plugin Development
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span>
-                  WooCommerce Integration
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-blue rounded-full mr-2"></span>
-                  Performance Optimization
-                </li>
-              </ul>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={0.2} direction="up" className="glass-panel p-6 rounded-xl">
-              <div className="bg-neon-purple/20 w-12 h-12 rounded-full flex items-center justify-center text-neon-purple mb-4">
-                <Layers size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Ruby on Rails Developer</h3>
-              <p className="text-gray-400 mb-4">
-                Proficient in building robust web applications with Ruby on Rails, focusing on clean code, test-driven development, and scalable architectures.
-              </p>
-              <ul className="text-gray-400 space-y-2">
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2"></span>
-                  Full-stack Rails Development
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2"></span>
-                  API Development
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2"></span>
-                  Database Design
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-purple rounded-full mr-2"></span>
-                  Testing & Deployment
-                </li>
-              </ul>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={0.3} direction="up" className="glass-panel p-6 rounded-xl">
-              <div className="bg-neon-pink/20 w-12 h-12 rounded-full flex items-center justify-center text-neon-pink mb-4">
-                <BriefcaseBusiness size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-3">MERN Stack Developer</h3>
-              <p className="text-gray-400 mb-4">
-                Experienced in building modern web applications using MongoDB, Express.js, React, and Node.js with a focus on responsive UIs and robust backend services.
-              </p>
-              <ul className="text-gray-400 space-y-2">
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2"></span>
-                  React Frontend Development
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2"></span>
-                  Node.js Backend Services
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2"></span>
-                  MongoDB Database Design
-                </li>
-                <li className="flex items-center">
-                  <span className="w-1.5 h-1.5 bg-neon-pink rounded-full mr-2"></span>
-                  RESTful & GraphQL APIs
-                </li>
-              </ul>
-            </AnimatedSection>
+          {/* Date and Time Bar - Mobile Responsive */}
+          <div className="flex items-center justify-between text-xs text-muted-foreground bg-muted/50 rounded-lg px-3 py-2">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-3 h-3" />
+              <span className={isMobile ? "hidden" : ""}>{formatDate(currentTime)}</span>
+              <span className={isMobile ? "" : "hidden"}>{currentTime.toLocaleDateString()}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-3 h-3" />
+              <span>{formatTime(currentTime)}</span>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Experience Section */}
-      <section className="section">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Work <span className="text-gradient">Experience</span></h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">My professional journey as a developer</p>
-            </div>
-          </AnimatedSection>
-          
-          <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-neon-blue via-neon-purple to-neon-pink"></div>
+      {/* Mobile-Optimized Content */}
+      <div className="flex-1 overflow-hidden">
+        <ScrollArea className="h-full">
+          <div className="p-3 md:p-4 space-y-4 md:space-y-6 pb-6">
             
-            {experienceData.map((item, index) => (
-              <AnimatedSection 
-                key={index}
-                delay={0.2 * index}
-                direction={index % 2 === 0 ? "left" : "right"}
-                className={`relative mb-12 ${
-                  index % 2 === 0 ? "text-right pr-12 md:ml-auto md:mr-0" : "pl-12"
-                } md:w-1/2`}
-              >
-                <div className="absolute top-0 w-4 h-4 rounded-full bg-neon-blue animate-pulse shadow-lg shadow-neon-blue/50 z-10 border-2 border-dark-100 left-1/2 transform -translate-x-1/2"></div>
-                <div className="glass-panel p-6 rounded-xl">
-                  <span className="inline-block px-3 py-1 text-xs rounded-full bg-neon-blue/10 text-neon-blue mb-3">
-                    {item.period}
-                  </span>
-                  <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
-                  <p className="text-neon-blue font-medium mb-3">{item.company}</p>
-                  <p className="text-gray-400">{item.description}</p>
+            {/* Alerts Section - Mobile First */}
+            {stats.alerts && stats.alerts.length > 0 && (
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <Bell className="w-4 h-4 text-orange-500" />
+                  <h2 className="text-sm md:text-base font-semibold text-foreground">Alerts</h2>
+                  <Badge variant="destructive" className="h-5 text-xs">
+                    {stats.alerts.length}
+                  </Badge>
                 </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <TestimonialsSection />
-
-      {/* Featured Projects Section */}
-      <section className="section bg-dark-200/50 border-y border-white/5">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-16">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured <span className="text-gradient">Projects</span></h2>
-                <p className="text-gray-400 max-w-2xl">A selection of my recent work</p>
+                <div className="grid gap-2">
+                  {stats.alerts.slice(0, isMobile ? 2 : 4).map((alert, index) => (
+                    <Card key={index} className="border-orange-200 bg-orange-50 dark:bg-orange-950/20">
+                      <CardContent className="p-3">
+                        <div className="flex items-start gap-2">
+                          <AlertTriangle className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-medium text-foreground">{alert.title}</p>
+                            <p className="text-xs text-muted-foreground mt-1">{alert.message}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                  {stats.alerts.length > (isMobile ? 2 : 4) && (
+                    <Button variant="outline" size="sm" className="h-8 text-xs">
+                      View {stats.alerts.length - (isMobile ? 2 : 4)} more alerts
+                    </Button>
+                  )}
+                </div>
               </div>
-              <Link
-                to="/projects"
-                className="mt-4 md:mt-0 neo-button flex items-center self-start"
-              >
-                <span>View All Projects</span>
-                <ArrowRight size={18} className="ml-2" />
-              </Link>
-            </div>
-          </AnimatedSection>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <AnimatedSection key={index} delay={0.1 * index}>
-                <ProjectCard {...project} />
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+            )}
 
-      {/* Call to Action */}
-      <section className="section">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="glass-panel p-8 md:p-12 rounded-2xl relative overflow-hidden">
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-neon-blue blur-[80px]"></div>
-                <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-neon-purple blur-[80px]"></div>
+            {/* Key Metrics Grid - Mobile Responsive */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <BarChart3 className="w-4 h-4 text-blue-500" />
+                <h2 className="text-sm md:text-base font-semibold text-foreground">Today's Overview</h2>
               </div>
               
-              <div className="relative z-10 text-center max-w-2xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to work together?</h2>
-                <p className="text-gray-400 mb-8">
-                  I'm currently available for freelance projects and full-time positions. 
-                  Let's create something amazing together!
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link
-                    to="/contact"
-                    className="neo-button flex items-center"
-                  >
-                    <span>Get in Touch</span>
-                    <ArrowRight size={18} className="ml-2" />
-                  </Link>
-                  
-                  <Link
-                    to="/services"
-                    className="px-6 py-3 rounded-md border border-white/10 text-white font-medium hover:bg-white/5 transition-colors duration-300"
-                  >
-                    View My Services
-                  </Link>
-                  
-                  <div className="flex items-center space-x-4">
-                    <a 
-                      href="https://github.com/AliIshaqPro"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-dark-400 border border-white/10 text-white hover:text-neon-blue transition-colors"
-                    >
-                      <Github size={20} />
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/in/ali-ishaq-sandhu/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-dark-400 border border-white/10 text-white hover:text-neon-blue transition-colors"
-                    >
-                      <Linkedin size={20} />
-                    </a>
-                  </div>
-                </div>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {/* Today's Revenue */}
+                <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20 border-green-200">
+                  <CardContent className="p-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                        <DollarSign className="w-3 h-3 text-white" />
+                      </div>
+                      <h3 className="text-xs font-medium text-green-700 dark:text-green-300">Revenue</h3>
+                    </div>
+                    <p className="text-lg md:text-xl font-bold text-green-900 dark:text-green-100">
+                      {formatCurrency(stats.financial.todayRevenue)}
+                    </p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <TrendingUp className="w-3 h-3 text-green-600" />
+                      <span className="text-xs text-green-600">+{stats.financial.revenueGrowth.toFixed(1)}%</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Today's Sales */}
+                <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-blue-200">
+                  <CardContent className="p-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
+                        <ShoppingCart className="w-3 h-3 text-white" />
+                      </div>
+                      <h3 className="text-xs font-medium text-blue-700 dark:text-blue-300">Sales</h3>
+                    </div>
+                    <p className="text-lg md:text-xl font-bold text-blue-900 dark:text-blue-100">
+                      {stats.sales.todaySales}
+                    </p>
+                    <span className="text-xs text-blue-600">orders today</span>
+                  </CardContent>
+                </Card>
+
+                {/* Inventory Value */}
+                <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20 border-purple-200">
+                  <CardContent className="p-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
+                        <Package className="w-3 h-3 text-white" />
+                      </div>
+                      <h3 className="text-xs font-medium text-purple-700 dark:text-purple-300">Inventory</h3>
+                    </div>
+                    <p className="text-lg md:text-xl font-bold text-purple-900 dark:text-purple-100">
+                      {formatCurrency(stats.inventory.totalInventoryValue)}
+                    </p>
+                    {stats.inventory.lowStockItems > 0 && (
+                      <div className="flex items-center gap-1 mt-1">
+                        <AlertTriangle className="w-3 h-3 text-orange-500" />
+                        <span className="text-xs text-orange-600">{stats.inventory.lowStockItems} low stock</span>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+
+                {/* Customers */}
+                <Card className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/20 dark:to-orange-900/20 border-orange-200">
+                  <CardContent className="p-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
+                        <Users className="w-3 h-3 text-white" />
+                      </div>
+                      <h3 className="text-xs font-medium text-orange-700 dark:text-orange-300">Customers</h3>
+                    </div>
+                    <p className="text-lg md:text-xl font-bold text-orange-900 dark:text-orange-100">
+                      {stats.customers.totalCustomers}
+                    </p>
+                    <span className="text-xs text-orange-600">+{stats.customers.newCustomersThisMonth} this month</span>
+                  </CardContent>
+                </Card>
               </div>
             </div>
-          </AnimatedSection>
-        </div>
-      </section>
-    </main>
+
+            {/* Financial Summary - Mobile Responsive */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <PieChart className="w-4 h-4 text-green-500" />
+                <h2 className="text-sm md:text-base font-semibold text-foreground">Financial Summary</h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {/* Monthly Revenue */}
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4 text-green-500" />
+                      Monthly Revenue
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <p className="text-xl md:text-2xl font-bold text-foreground">
+                      {formatCurrency(stats.financial.monthRevenue)}
+                    </p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <ArrowUpRight className="w-3 h-3 text-green-500" />
+                      <span className="text-xs text-green-600">
+                        {stats.financial.revenueGrowth > 0 ? '+' : ''}{stats.financial.revenueGrowth.toFixed(1)}% from last month
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Net Profit */}
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <Target className="w-4 h-4 text-blue-500" />
+                      Net Profit
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <p className="text-xl md:text-2xl font-bold text-foreground">
+                      {formatCurrency(stats.financial.netProfit)}
+                    </p>
+                    <span className="text-xs text-muted-foreground">
+                      Margin: {stats.financial.profitMargin.toFixed(1)}%
+                    </span>
+                  </CardContent>
+                </Card>
+
+                {/* Cash Flow */}
+                <Card className="md:col-span-2 lg:col-span-1">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <Activity className="w-4 h-4 text-purple-500" />
+                      Cash Flow
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <p className={`text-xl md:text-2xl font-bold ${
+                      stats.cashFlow.netCashFlow >= 0 ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {formatCurrency(stats.cashFlow.netCashFlow)}
+                    </p>
+                    <div className="flex items-center justify-between mt-1 text-xs">
+                      <span className="text-green-600">In: {formatCurrency(stats.cashFlow.monthlyInflows)}</span>
+                      <span className="text-red-600">Out: {formatCurrency(stats.cashFlow.monthlyOutflows)}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Quick Actions & Recent Activity - Mobile Responsive */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Top Products */}
+              {stats.inventory.fastMovingProducts && stats.inventory.fastMovingProducts.length > 0 && (
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      Top Selling Products
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="space-y-3">
+                      {stats.inventory.fastMovingProducts.slice(0, isMobile ? 3 : 5).map((product, index) => (
+                        <div key={index} className="flex items-center justify-between">
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-medium text-foreground truncate">{product.name}</p>
+                            <p className="text-xs text-muted-foreground">Remaining: {product.remaining}</p>
+                          </div>
+                          <Badge variant="secondary" className="ml-2 text-xs">
+                            {product.sold} sold
+                          </Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Recent High-Value Sales */}
+              {stats.sales.highValueSales && stats.sales.highValueSales.length > 0 && (
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <Zap className="w-4 h-4 text-blue-500" />
+                      Recent High-Value Sales
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="space-y-3">
+                      {stats.sales.highValueSales.slice(0, isMobile ? 3 : 5).map((sale, index) => (
+                        <div key={index} className="flex items-center justify-between">
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-medium text-foreground">{sale.customer}</p>
+                            <p className="text-xs text-muted-foreground">Order #{sale.orderNumber}</p>
+                          </div>
+                          <div className="text-right ml-2">
+                            <p className="text-sm font-bold text-green-600">{formatCurrency(sale.amount)}</p>
+                            <p className="text-xs text-muted-foreground">{new Date(sale.date).toLocaleDateString()}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+
+            {/* Status Footer - Mobile Optimized */}
+            <div className="pt-4 border-t">
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>System Online</span>
+                </div>
+                <span>Last updated: {formatTime(currentTime)}</span>
+              </div>
+            </div>
+          </div>
+        </ScrollArea>
+      </div>
+    </div>
   );
 };
 
